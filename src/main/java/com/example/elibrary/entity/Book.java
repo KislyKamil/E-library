@@ -18,10 +18,10 @@ public class Book implements Serializable {
   private Integer bookId;
 
   @Column(name = "name")
-  private String name = "'NULL'";
+  private String name;
 
   @Column(name = "author")
-  private String author = "NULL";
+  private String author;
 
   @Column(name = "status", nullable = false)
   private Boolean status;

@@ -26,9 +26,5 @@ public class DataBaseLoader implements ApplicationRunner {
 
 
 
-       /* for (UserEntity user: userRepository.findAll()) {
-            System.out.println(user.getName());
-        } */
-
     }
 }
