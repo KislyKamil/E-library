@@ -1,10 +1,8 @@
 package com.example.elibrary.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 @Table(name = "users")
@@ -15,7 +13,8 @@ public class Users implements Serializable {
 
   @Id
   @Column(insertable = false, name = "user_id", nullable = false)
-  private Integer userId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private int userId;
 
   @Column(name = "login", nullable = false)
   private String login;
@@ -27,7 +26,7 @@ public class Users implements Serializable {
   private String email;
 
   @Column(name = "type")
-  private String type = "NULL";
+  private String type;
 
   
 }

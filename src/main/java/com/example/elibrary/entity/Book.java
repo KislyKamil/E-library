@@ -1,10 +1,8 @@
 package com.example.elibrary.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 @Entity
@@ -15,6 +13,7 @@ public class Book implements Serializable {
 
   @Id
   @Column(insertable = false, name = "book_id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer bookId;
 
   @Column(name = "name")

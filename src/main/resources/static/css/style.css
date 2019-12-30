@@ -4,10 +4,18 @@
 
 body {
     background: #2a2e37;
-    color:white;
+    color: white;
+    font-family: 'Karla';
 }
+
 a {
     color: white;
+}
+
+.returnMsg {
+
+    font-size: 50px;
+    text-align: center;
 }
 
 .search {
@@ -19,6 +27,7 @@ a {
     overflow: hidden;
     transition: all 0.5s ease;
 }
+
 .search:before {
     content: "";
     display: block;
@@ -28,9 +37,11 @@ a {
     background-color: #00fede;
     transition: all 0.5s ease;
 }
+
 .search.open {
     width: 750px;
 }
+
 .search.open:before {
     height: 60px;
     margin: 20px 0 20px 30px;
@@ -47,6 +58,7 @@ a {
     padding: 20px 100px 20px 45px;
     font-size: 40px;
 }
+
 .search-box:focus {
     outline: none;
 }
@@ -72,6 +84,7 @@ a {
     margin-left: 5px;
     transition: all 0.5s ease;
 }
+
 .search-icon:before {
     content: "";
     width: 3px;
@@ -84,6 +97,7 @@ a {
     transform: rotate(-45deg);
     transition: all 0.5s ease;
 }
+
 .search-icon:after {
     content: "";
     width: 3px;
@@ -96,18 +110,21 @@ a {
     transform: rotate(-45deg);
     transition: all 0.5s ease;
 }
+
 .open .search-icon {
     margin: 0;
     width: 60px;
     height: 60px;
     border-radius: 60px;
 }
+
 .open .search-icon:before {
     transform: rotate(52deg);
     right: 22px;
     top: 23px;
     height: 18px;
 }
+
 .open .search-icon:after {
     transform: rotate(-230deg);
     right: 22px;

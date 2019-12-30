@@ -12,6 +12,8 @@ public class RegisterForm {
     private String email;
     private String type;
 
+    /*
+
     public RegisterForm(String login, String password, String email, String type) {
         this.login = login;
         this.password = password;
@@ -19,4 +21,5 @@ public class RegisterForm {
         this.type = type;
     }
 
+  */
 }
