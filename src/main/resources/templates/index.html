@@ -70,6 +70,20 @@
     </tbody>
 </table>
 
+<nav aria-label="Page navigation example">
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item" th:id="${i}" onclick="setPage(2)" th:each="i : ${#numbers.sequence( 1, 4/1)}" ><a class="page-link" th:text="${i}" href="#"></a></li>
+        <li class="page-item">
+            <a class="page-link" onclick="setPage(2)" href="#">Next</a>
+        </li>
+    </ul>
+
+</nav>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
