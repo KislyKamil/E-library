@@ -4,6 +4,7 @@ import com.example.elibrary.entity.Book;
 import com.example.elibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,7 +56,7 @@ public class HomeController {
 
         ModelAndView model = new ModelAndView("index");
         model.addObject("books", b);
-        model.addObject("length", pageNumbers);
+        //model.addObject("length", pageNumbers);
 
         return model;
 
@@ -63,15 +64,35 @@ public class HomeController {
     }
 
     @RequestMapping(path = "/{pageId}")
-    public ModelAndView pageView(@PathVariable("pageId") int pageId) {
+    public String pageView(@PathVariable("pageId") int pageId, ModelMap model) {
 
         ArrayList<Book> b = new ArrayList<>();
+        ArrayList<Book> allBooks = new ArrayList<>();
+        ArrayList<Integer> ids = new ArrayList<>();
 
-        b.addAll(book.findAll());
+        allBooks.addAll(book.findAll());
 
-        b.size();
+        int index = (pageId * 5) - 4;
 
-        return new ModelAndView();
+
+
+        if (pageId <= roundUp(allBooks.size())) {
+
+            while (index <= (pageId * 5)) {
+                ids.add(index);
+                index++;
+            }
+
+        } else {
+            return "error";
+        }
+
+        b.addAll(book.findAllById(ids));
+
+        model.addAttribute("pageId", pageId);
+        model.addAttribute("books",b);
+
+        return "books :: bookList";
     }
 
 
