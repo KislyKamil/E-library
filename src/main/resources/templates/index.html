@@ -54,8 +54,22 @@
 </div>
 
 
-<table th:replace="books :: bookList" id="bookList" class="table table-dark" >
+<table id="bookList" class="table table-dark">
+    <thead>
+    <tr>
 
+        <th scope="col">Name</th>
+        <th scope="col">Author</th>
+
+    </tr>
+    </thead>
+    <tbody class="tbody" id="tbody">
+    <tr th:each="book: ${books}">
+
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+    </tr>
+    </tbody>
 </table>
 
 
@@ -65,7 +79,8 @@
         <li class="page-item">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
         </li>
-        <li class="page-item" th:id="${i}" th:each="i : ${#numbers.sequence( 1, 4/1)}" ><a class="page-link" th:text="${i}" th:onclick="openPage('/[[${i}]]')" ></a></li>
+        <li class="page-item" th:id="${i}" th:each="i : ${#numbers.sequence( 1, 4/1)}"><a class="page-link" th:text="${i}" th:onclick="openPage('/[[${i}]]')"></a>
+        </li>
         <li class="page-item">
             <a class="page-link" onclick="setPage(2)" href="#">Next</a>
         </li>
@@ -89,3 +104,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+

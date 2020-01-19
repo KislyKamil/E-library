@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -64,7 +66,8 @@ public class HomeController {
     }
 
     @RequestMapping(path = "/{pageId}")
-    public String pageView(@PathVariable("pageId") int pageId, ModelMap model) {
+    @ResponseBody
+    public ArrayList<Book> getBooks(@PathVariable("pageId") int pageId, ModelMap model) {
 
         ArrayList<Book> b = new ArrayList<>();
         ArrayList<Book> allBooks = new ArrayList<>();
@@ -75,7 +78,6 @@ public class HomeController {
         int index = (pageId * 5) - 4;
 
 
-
         if (pageId <= roundUp(allBooks.size())) {
 
             while (index <= (pageId * 5)) {
@@ -84,15 +86,15 @@ public class HomeController {
             }
 
         } else {
-            return "error";
+           // return "error";
         }
 
         b.addAll(book.findAllById(ids));
 
         model.addAttribute("pageId", pageId);
-        model.addAttribute("books",b);
+        model.addAttribute("books", b);
 
-        return "books :: bookList";
+        return b;
     }
 
 
