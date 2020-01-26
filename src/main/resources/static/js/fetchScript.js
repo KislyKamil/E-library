@@ -21,22 +21,28 @@ $(document).ready(function () {
 
 });
 
-$(document).click((event) => {
+$("li." + "page-item").click((event) => {
 
     let pageId = $(event.target).text();
 
+    event.preventDefault();
 
     if ($("li").hasClass("page-item active") === true) {
 
         $("li")
             .removeClass("page-item active")
             .addClass("page-item");
-    }
+    };
 
-    $('#' + pageId)
-        .addClass("page-item active")
 
-})
+
+    console.log($('li#' + pageId));
+    console.log(pageId);
+    $('li#' + pageId)
+        .removeClass("page-item")
+        .addClass("page-item active");
+
+});
 
 function openPage(url) {
 
@@ -49,7 +55,7 @@ function openPage(url) {
 
             let tbody = document.getElementById("tbody");
             let obj = jsonResponse;
-            let pageId = 1;
+
 
             tbody.innerHTML = "";
 

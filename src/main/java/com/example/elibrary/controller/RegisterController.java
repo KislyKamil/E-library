@@ -3,6 +3,7 @@ package com.example.elibrary.controller;
 import com.example.elibrary.entity.Users;
 import com.example.elibrary.model.RegisterForm;
 import com.example.elibrary.repository.UsersRepository;
+import com.sun.tools.javac.comp.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,7 +18,9 @@ public class RegisterController {
     private final UsersRepository users;
 
     public RegisterController(UsersRepository users) {
+
         this.users = users;
+
     }
 
     @RequestMapping(path = "/register")
@@ -29,6 +32,10 @@ public class RegisterController {
         return registerView;
     }
 
+
+
+
+
     @RequestMapping(path = "/registerUser")
     public String registerUser(@ModelAttribute("registerForm") RegisterForm form) {
 
@@ -37,6 +44,7 @@ public class RegisterController {
         user.setPassword(form.getPassword());
         user.setEmail(form.getEmail());
         user.setType("user");
+
 
         users.save(user);
 

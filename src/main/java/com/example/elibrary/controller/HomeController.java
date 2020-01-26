@@ -12,17 +12,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @Controller
 public class HomeController {
 
 
-    private final BookRepository book;
+    private final BookRepository bookRepo;
 
-    public HomeController(BookRepository book) {
 
-        this.book = book;
+    public HomeController(BookRepository bookRepo) {
+
+
+        this.bookRepo = bookRepo;
     }
 
     public int roundUp(int value) {
@@ -40,17 +43,20 @@ public class HomeController {
         return sizeInt;
     }
 
+    //TODO Organize communication with Entity and repository by Service.
+
 
     @RequestMapping(path = "/")
     @Autowired
     public ModelAndView index() {
 
         ArrayList<Book> b = new ArrayList<>();
+
         int size;
         int pageNumbers;
 
 
-        b.addAll(book.findAll());
+        b.addAll(bookRepo.findAll());
 
         size = b.size();
 
@@ -73,7 +79,7 @@ public class HomeController {
         ArrayList<Book> allBooks = new ArrayList<>();
         ArrayList<Integer> ids = new ArrayList<>();
 
-        allBooks.addAll(book.findAll());
+        allBooks.addAll(bookRepo.findAll());
 
         int index = (pageId * 5) - 4;
 
@@ -86,10 +92,10 @@ public class HomeController {
             }
 
         } else {
-           // return "error";
+            // return "error";
         }
 
-        b.addAll(book.findAllById(ids));
+        b.addAll(bookRepo.findAllById(ids));
 
         model.addAttribute("pageId", pageId);
         model.addAttribute("books", b);

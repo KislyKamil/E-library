@@ -1,13 +1,13 @@
 package com.example.elibrary.entity;
-
 import java.io.Serializable;
 import javax.persistence.*;
-
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Data
 @Table(name = "book")
+@DynamicUpdate
 public class Book implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -25,5 +25,5 @@ public class Book implements Serializable {
   @Column(name = "status", nullable = false)
   private Boolean status;
 
-  
+
 }
