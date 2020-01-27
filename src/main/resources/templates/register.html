@@ -32,13 +32,13 @@
         <div class="form-group row">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="password"  th:name="password" placeholder="password">
+                <input type="password" class="form-control" id="password"  th:name="password" th:field="*{password}" placeholder="password">
             </div>
         </div>
         <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label">Email address</label>
+            <label for="email" class="col-sm-2 col-form-label" >Email address</label>
             <div class="col-sm-4">
-            <input type="email" class="form-control" id="email" th:name="email" placeholder="name@example.com">
+            <input type="email" class="form-control" id="email" th:name="email" th:field="*{email}"placeholder="name@example.com">
             </div>
         </div>
 

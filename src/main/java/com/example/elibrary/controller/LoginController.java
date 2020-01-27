@@ -54,7 +54,7 @@ public class LoginController{
         setUser(user.getLogin(), role);
         model.addAttribute("role",role);
 
-        return "index";
+        return "Success";
 
     }
 

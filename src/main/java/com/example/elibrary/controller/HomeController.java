@@ -1,7 +1,6 @@
 package com.example.elibrary.controller;
-
 import com.example.elibrary.entity.Book;
-import com.example.elibrary.repository.BookRepository;
+import com.example.elibrary.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,28 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 
 @Controller
 public class HomeController {
 
 
-    private final BookRepository bookRepo;
+    private final BookService bookService;
 
 
-    public HomeController(BookRepository bookRepo) {
+    public HomeController(BookService bookService) {
 
-
-        this.bookRepo = bookRepo;
+        this.bookService = bookService;
     }
 
     public int roundUp(int value) {
 
-        float toFloat = value;
-        float size = toFloat / 5;
+
+        float size = (float)value / 5;
 
         int sizeInt = value / 5;
 
@@ -43,28 +40,23 @@ public class HomeController {
         return sizeInt;
     }
 
-    //TODO Organize communication with Entity and repository by Service.
-
-
     @RequestMapping(path = "/")
     @Autowired
     public ModelAndView index() {
 
-        ArrayList<Book> b = new ArrayList<>();
-
         int size;
         int pageNumbers;
 
+        List<Book> bookList = new ArrayList<>(bookService.listBooks().subList(0, 5));
 
-        b.addAll(bookRepo.findAll());
 
-        size = b.size();
-
+        size = bookService.listBooks().size();
         pageNumbers = roundUp(size);
 
+
         ModelAndView model = new ModelAndView("index");
-        model.addObject("books", b);
-        //model.addObject("length", pageNumbers);
+        model.addObject("books", bookList);
+        model.addObject("length", pageNumbers);
 
         return model;
 
@@ -73,16 +65,13 @@ public class HomeController {
 
     @RequestMapping(path = "/{pageId}")
     @ResponseBody
-    public ArrayList<Book> getBooks(@PathVariable("pageId") int pageId, ModelMap model) {
+    public List<Book> getBooks(@PathVariable("pageId") int pageId, ModelMap model) {
 
-        ArrayList<Book> b = new ArrayList<>();
-        ArrayList<Book> allBooks = new ArrayList<>();
         ArrayList<Integer> ids = new ArrayList<>();
 
-        allBooks.addAll(bookRepo.findAll());
+        ArrayList<Book> allBooks = new ArrayList<>(bookService.listBooks());
 
         int index = (pageId * 5) - 4;
-
 
         if (pageId <= roundUp(allBooks.size())) {
 
@@ -91,16 +80,14 @@ public class HomeController {
                 index++;
             }
 
-        } else {
-            // return "error";
-        }
+        }  // return "error";
 
-        b.addAll(bookRepo.findAllById(ids));
+
+        ArrayList<Book> pageList = new ArrayList<>(bookService.ListById(ids));
 
         model.addAttribute("pageId", pageId);
-        model.addAttribute("books", b);
 
-        return b;
+        return pageList;
     }
 
 

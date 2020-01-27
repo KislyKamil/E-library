@@ -1,25 +1,21 @@
 package com.example.elibrary.controller;
-
 import com.example.elibrary.entity.Users;
 import com.example.elibrary.model.RegisterForm;
-import com.example.elibrary.repository.UsersRepository;
-import com.sun.tools.javac.comp.Todo;
+import com.example.elibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RegisterController {
 
-    private final UsersRepository users;
+    private final UserService userService;
 
-    public RegisterController(UsersRepository users) {
+    public RegisterController(UserService userService) {
 
-        this.users = users;
+        this.userService = userService;
 
     }
 
@@ -39,6 +35,7 @@ public class RegisterController {
     @RequestMapping(path = "/registerUser")
     public String registerUser(@ModelAttribute("registerForm") RegisterForm form) {
 
+
         Users user = new Users();
         user.setLogin(form.getLogin());
         user.setPassword(form.getPassword());
@@ -46,9 +43,9 @@ public class RegisterController {
         user.setType("user");
 
 
-        users.save(user);
+        userService.addUser(user);
 
-        return "registerSuccess";
+        return "Success";
 
     }
 

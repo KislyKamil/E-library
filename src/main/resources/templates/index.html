@@ -17,7 +17,7 @@
 <body>
 
 
-<div th:object="${param.login}"></div>
+
 
 <nav th:fragment="defNav" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" th:href="@{/}">E-Library</a>
@@ -75,11 +75,11 @@
 
 <nav aria-label="Page navigation example">
 
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-center" th:with="pages = ${length}">
         <li class="page-item">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
         </li>
-        <li class="page-item" th:id="${i}" th:each="i : ${#numbers.sequence( 1, 4/1)}"><a class="page-link" th:text="${i}" th:onclick="openPage('/[[${i}]]')"></a>
+        <li class="page-item"  th:id="${i}" th:each="i : ${#numbers.sequence( 1, pages/1)}"><a class="page-link" th:text="${i}" th:onclick="openPage('/[[${i}]]')"></a>
         </li>
         <li class="page-item">
             <a class="page-link"  href="#">Next</a>
