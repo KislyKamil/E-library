@@ -72,6 +72,18 @@
     </tbody>
 </table>
 
+<table id="xx" class="table table-dark">
+
+    <tbody class="tbody" id="tbody">
+    <tr th:each="order: ${orders}">
+
+        <td th:text="${order.orderId}"></td>
+        <td th:text="${order.bookName}"></td>
+        <td th:text="${order.userId}"></td>
+        <td th:text="${order.date}"></td>
+    </tr>
+    </tbody>
+</table>
 
 <nav aria-label="Page navigation example">
 
