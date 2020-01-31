@@ -1,8 +1,14 @@
 $('.search-button').click(function () {
     $(this).parent().toggleClass('open');
+
+
+    if($(".search open")){
+        $(this).off('click');
+    }
 });
 
 
+/*
 function setPage(id) {
     let page = document.getElementById(id);
 
@@ -15,7 +21,5 @@ function setPage(id) {
     let previousPage = document.getElementById(previous);
 
     page.setAttribute("class", "page-item active");
-
-
 }
-
+*/

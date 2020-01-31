@@ -5,15 +5,18 @@ import com.example.elibrary.repository.OrderRepository;
 import com.example.elibrary.service.BookService;
 import com.example.elibrary.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +27,14 @@ public class HomeController {
 
     private final BookService bookService;
     private final OrderService orderService;
-    private final OrderRepository orderRepository;
 
 
-    public HomeController(BookService bookService, OrderService orderService, OrderRepository orderRepository) {
+
+    public HomeController(BookService bookService, OrderService orderService) {
 
         this.bookService = bookService;
         this.orderService = orderService;
-        this.orderRepository = orderRepository;
+
     }
 
     public int roundUp(int value) {
@@ -51,8 +54,12 @@ public class HomeController {
 
     @RequestMapping(path = "/")
     @Autowired
-    public ModelAndView index(HttpSession session) {
+    public ModelAndView index(HttpSession session, HttpServletRequest request) {
 
+        //request.getSession();
+       // session.getAttribute("who");
+
+        //session.setAttribute("homeEX","Are u working?");
 
 
         int size;
@@ -69,6 +76,7 @@ public class HomeController {
         model.addObject("books", bookList);
         model.addObject("length", pageNumbers);
         model.addObject("orders", orderService.listOrders());
+      //  model.addObject("exist", "tak");
 
         return model;
 
@@ -100,6 +108,20 @@ public class HomeController {
 
 
         return pageList;
+    }
+
+    @RequestMapping(path = "/search")
+    @ResponseBody
+    public List<Book> searchResult(@RequestParam("query") String query){
+
+
+        List<Book> results = new ArrayList<>();
+
+        results.addAll(bookService.ListBooksByContent(query));
+        System.out.println(results);
+
+        return results;
+
     }
 
 

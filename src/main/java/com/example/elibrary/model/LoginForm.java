@@ -1,8 +1,13 @@
 package com.example.elibrary.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class LoginForm {
+
+
     private String login;
     private String password;
+
 
     public String getLogin() {
         return login;

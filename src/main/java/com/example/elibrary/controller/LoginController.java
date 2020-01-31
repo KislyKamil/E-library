@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -34,9 +35,11 @@ public class LoginController{
 
     @RequestMapping(path = "/loginUser", method = RequestMethod.POST)
     @Scope("session")
-    public String loginUser(@ModelAttribute("login") LoginForm user, HttpSession session, ModelMap model) {
+    public String loginUser(@ModelAttribute("login") LoginForm user, HttpSession session, ModelMap model, HttpServletRequest request) {
 
         final String role;
+
+        request.getSession().setAttribute("name", "admin");
 
         try {
             if (user.getPassword().isEmpty()) {
@@ -58,7 +61,7 @@ public class LoginController{
 
         setUser(user.getLogin(), role);
         model.addAttribute("role",role);
-        session.setAttribute("who", user.getLogin());
+       // session.setAttribute("who", user.getLogin());
 
 
         return "Success";

@@ -72,7 +72,8 @@
     </tbody>
 </table>
 
-<table id="xx" class="table table-dark">
+<!-- Testing Stuff! -->
+<table id="xx" th:if="${exist}" class="table table-dark">
 
     <tbody class="tbody" id="tbody">
     <tr th:each="order: ${orders}">
@@ -84,7 +85,7 @@
     </tr>
     </tbody>
 </table>
-
+<!--------------------------------------------------------->
 <nav aria-label="Page navigation example">
 
     <ul class="pagination justify-content-center" th:with="pages = ${length}">

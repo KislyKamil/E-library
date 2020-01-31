@@ -1,18 +1,5 @@
-/*
-function openPage(url) {
-
-    let xhttp = new XMLHttpRequest();
-
-    document.getElementById("bookList").innerHTML = xhttp.responseText;
 
 
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(url);
-    console.log(typeof (xhttp.responseText));
-    console.log(xhttp.responseText);
-};
-*/
 
 $(document).ready(function () {
 
@@ -89,3 +76,67 @@ function openPage(url) {
              */
         });
 }
+
+
+/*
+
+    $(".search-icon").click(() => {
+
+        const query = $(".search-box").val();
+
+
+        if(query === ""){
+            console.log("You have to put something to search!")
+            console.log(query)
+
+        }else if(query != ""){
+
+            console.log("Ok!");
+
+            fetch("/search", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'text/json'
+
+                },
+                body: JSON.stringify(query)
+
+            }).then((response) => {
+                return response.json();
+
+            }).then((response) => {
+
+                console.log(response);
+
+            })
+        }
+    })
+
+
+ */
+$(".search-icon").click(() => {
+
+    const query = $(".search-box").val();
+
+
+    if(!query){
+        console.log("You have to put something to search!")
+
+
+    }else if(query != ""){
+
+        console.log("Ok!");
+
+        fetch("/search?query=" + query
+
+        ).then((response) => {
+            return response.json();
+
+        }).then((response) => {
+
+            console.log(response);
+
+        })
+    }
+})
+
