@@ -7,6 +7,7 @@ import com.example.elibrary.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -27,7 +28,7 @@ public class HomeController {
 
     private final BookService bookService;
     private final OrderService orderService;
-
+    public int pageNumbers;
 
 
     public HomeController(BookService bookService, OrderService orderService) {
@@ -63,7 +64,7 @@ public class HomeController {
 
 
         int size;
-        int pageNumbers;
+
 
         List<Book> bookList = new ArrayList<>(bookService.listBooks().subList(0, 5));
 
@@ -112,13 +113,21 @@ public class HomeController {
 
     @RequestMapping(path = "/search")
     @ResponseBody
-    public List<Book> searchResult(@RequestParam("query") String query){
+    public List<Book> searchResult(@RequestParam("query") String query, Model model){
 
 
         List<Book> results = new ArrayList<>();
 
+        int size;
+
+
+        size = bookService.ListBooksByContent(query).size();
+        pageNumbers = roundUp(size);
+
         results.addAll(bookService.ListBooksByContent(query));
         System.out.println(results);
+
+        model.addAttribute("length", pageNumbers);
 
         return results;
 

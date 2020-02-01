@@ -1,11 +1,15 @@
 * {
     box-sizing: border-box;
 }
-
+html {
+    height: 100%;
+}
 body {
     background: #2a2e37;
     color: white;
     font-family: 'Karla';
+    min-height: 100%;
+
 }
 
 a {
@@ -134,4 +138,16 @@ a {
     right: 22px;
     top: 13px;
     height: 18px;
+}
+
+footer {
+    position: absolute;
+    justify-content: center;
+    bottom: 0;
+    display: block;
+    background-color: #252c37;
+    border-color: #634082;
+    height: 120px;
+    width: 100%;
+    text-align: center;
 }

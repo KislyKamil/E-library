@@ -28,11 +28,12 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Local list</a>
+                <a class="nav-link" th:href="@{/Account/}">Your Account</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" th:href="@{/adminPanel}">Admin Panel</a>
             </li>
+
         </ul>
         <a th:text="${role}" style="margin-right: 10px;"></a>
         <a th:text="${loginName}" style="margin-right: 10px;"></a>
@@ -45,6 +46,7 @@
         </a>
     </div>
 </nav>
+
 
 <div class="search" style="margin-bottom: 20px;">
     <input type="search" class="search-box" placeholder="Type what are you looking for"/>
@@ -72,21 +74,7 @@
     </tbody>
 </table>
 
-<!-- Testing Stuff! -->
-<table id="xx" th:if="${exist}" class="table table-dark">
-
-    <tbody class="tbody" id="tbody">
-    <tr th:each="order: ${orders}">
-
-        <td th:text="${order.orderId}"></td>
-        <td th:text="${order.bookName}"></td>
-        <td th:text="${order.userId}"></td>
-        <td th:text="${order.date}"></td>
-    </tr>
-    </tbody>
-</table>
-<!--------------------------------------------------------->
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation example" >
 
     <ul class="pagination justify-content-center" th:with="pages = ${length}">
         <li class="page-item">
@@ -100,6 +88,9 @@
     </ul>
 
 </nav>
+<footer class="footer">
+   <a>Copyright Kamil Kisły</a>
+</footer>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -116,5 +107,6 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
 
