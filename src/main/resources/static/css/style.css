@@ -151,3 +151,94 @@ footer {
     width: 100%;
     text-align: center;
 }
+
+.container{
+    margin-top: 10px;
+    height: 550px;
+    width: 80%;
+    border-color: darkslateblue;
+
+
+
+
+}
+.row .col-lg{
+    background-color: #2e3333;
+    text-align: center;
+    height: 525px;
+    padding: 0;
+    margin: 7px;
+
+}
+/* Searching for users style */
+
+
+
+#myInput {
+    box-sizing: border-box;
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 40%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+#userBox {
+    color: #252c37;
+    background-color: inherit;
+    width: 250px;
+    height: 250px;
+}
+.userLogin{
+    background-color: #dddddd;
+    border-style: ridge;
+    box-shadow: #dddddd;
+}
+#box2 div {
+    margin: 10px;
+}

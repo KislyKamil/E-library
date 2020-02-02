@@ -61,19 +61,21 @@
     <tr>
 
         <th scope="col">Name</th>
-        <th scope="col">Author</th>
+        <th scope="col" colspan="2">Author</th>
+
 
     </tr>
     </thead>
     <tbody class="tbody" id="tbody">
-    <tr th:each="book: ${books}">
+    <tr th:each="book: ${books}" >
 
         <td th:text="${book.name}"></td>
         <td th:text="${book.author}"></td>
+        <td> <button class='btn btn-primary' th:id="${book.bookId}" onclick="add()">reserve</button></td>
     </tr>
     </tbody>
 </table>
-
+<div id="snackbar">Added to your account, Will be available in your local library in 30 min</div>
 <nav aria-label="Page navigation example" >
 
     <ul class="pagination justify-content-center" th:with="pages = ${length}">

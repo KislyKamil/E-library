@@ -21,6 +21,31 @@
 <nav th:replace="index:: defNav"></nav>
 
 
+
+<div class="container">
+    <div class="row">
+                <div class="col-lg" id="box1">
+                    <input type="text" placeholder="Search.." class="findBox" th:href="@{/adminPanel/find}"/>
+                    <button type="button" class="btn btn-success" id="searchUser">Find User</button>
+                    <div id="userBox">
+
+                    </div>
+                </div>
+
+                <div class="col-lg" id="box2">
+
+                    <button type="button" class="btn btn-success">Add book</button>
+                    <div>
+                        Name: <input type="text"/>
+                        Author: <input type="text"/>
+                    </div>
+
+
+                </div>
+
+    </div>
+</div>
+
 <footer class="footer">
     <a>Copyright Kamil Kisły</a>
 </footer>

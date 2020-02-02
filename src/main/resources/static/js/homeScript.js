@@ -23,3 +23,14 @@ function setPage(id) {
     page.setAttribute("class", "page-item active");
 }
 */
+
+
+
+function add() {
+    console.log("ok?!")
+    let x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function() {
+        x.className = x.className.replace("show", "");
+    }, 3000);
+}

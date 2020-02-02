@@ -1,7 +1,8 @@
 package com.example.elibrary.service;
 
-import com.example.elibrary.entity.Users;
-import com.example.elibrary.repository.UsersRepository;
+
+import com.example.elibrary.entity.User;
+import com.example.elibrary.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,29 +13,38 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
-    public Users getUser(int id){
+    public User getUser(int id){
 
-        return usersRepository.findById(id).get();
+        return userRepository.findById(id).get();
     }
 
-    public void addUser(Users user){
+    public void addUser(User user){
 
-        usersRepository.save(user);
+        userRepository.save(user);
 
     }
 
-    public List<Users> listUsers(){
+    public List<User> listUsers(){
 
-         List<Users> users = new ArrayList<>(usersRepository.findAll());
+         List<User> users = new ArrayList<>(userRepository.findAll());
 
          return users;
     }
 
     public void deleteUser(int id){
 
-        usersRepository.deleteById(id);
+        userRepository.deleteById(id);
+
+    }
+
+    public List<User> findUser(String name){
+        List<User> user = new ArrayList<>();
+
+        user.addAll(userRepository.findByLoginLike(name));
+
+        return user;
 
     }
 

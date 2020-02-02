@@ -1,5 +1,5 @@
 package com.example.elibrary.controller;
-import com.example.elibrary.entity.Users;
+import com.example.elibrary.entity.User;
 import com.example.elibrary.model.RegisterForm;
 import com.example.elibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class RegisterController {
     public String registerUser(@ModelAttribute("registerForm") RegisterForm form) {
 
 
-        Users user = new Users();
+        User user = new User();
         user.setLogin(form.getLogin());
         user.setPassword(form.getPassword());
         user.setEmail(form.getEmail());

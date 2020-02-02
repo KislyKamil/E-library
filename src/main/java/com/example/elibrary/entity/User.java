@@ -5,10 +5,10 @@ import javax.persistence.*;
 
 import lombok.Data;
 
-@Table(name = "users")
+@Table(name = "user")
 @Entity
 @Data
-public class Users implements Serializable {
+public class User implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
