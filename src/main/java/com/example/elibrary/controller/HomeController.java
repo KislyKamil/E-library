@@ -1,11 +1,14 @@
 package com.example.elibrary.controller;
 import com.example.elibrary.entity.Book;
 import com.example.elibrary.entity.Order;
+import com.example.elibrary.entity.User;
 import com.example.elibrary.repository.OrderRepository;
 import com.example.elibrary.service.BookService;
 import com.example.elibrary.service.OrderService;
+import com.example.elibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,13 +31,16 @@ public class HomeController {
 
     private final BookService bookService;
     private final OrderService orderService;
+    private final UserService userService;
+
     public int pageNumbers;
 
 
-    public HomeController(BookService bookService, OrderService orderService) {
+    public HomeController(BookService bookService, OrderService orderService, UserService userService) {
 
         this.bookService = bookService;
         this.orderService = orderService;
+        this.userService = userService;
 
     }
 
@@ -62,12 +68,9 @@ public class HomeController {
 
         //session.setAttribute("homeEX","Are u working?");
 
-
         int size;
 
-
         List<Book> bookList = new ArrayList<>(bookService.listBooks().subList(0, 5));
-
 
         size = bookService.listBooks().size();
         pageNumbers = roundUp(size);

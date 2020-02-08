@@ -1,8 +1,11 @@
 package com.example.elibrary.controller;
 
+import com.example.elibrary.entity.User;
 import com.example.elibrary.model.LoginForm;
+import com.example.elibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,11 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 
 @Controller
 public class LoginController{
 
+    final UserService userService;
+
+    public LoginController(UserService userService){
+
+        this.userService = userService;
+    }
 
 
     @RequestMapping(path = "/login")
@@ -33,6 +43,8 @@ public class LoginController{
     public String loginUser(@ModelAttribute("login") LoginForm user, HttpSession session, ModelMap model, HttpServletRequest request) {
 
         final String role;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
         request.getSession().setAttribute("name", "admin");
 
@@ -43,19 +55,30 @@ public class LoginController{
 
         } catch (Exception e) {
 
-
         }
-        model.addAttribute("loginName", user.getLogin());
-        model.addAttribute("password", user.getPassword());
+        ArrayList<User> logged = new ArrayList<>();
+        logged.addAll(userService.getUserByName(user.getLogin()));
 
-        if (user.getLogin().equals("Admin")) {
-            role = "Admin";
+        
+
+
+
+        if (encoder.matches(user.getPassword(), logged.get(0).getPassword())) {
+
+            model.addAttribute("loginName", user.getLogin());
+            model.addAttribute("id", logged.get(0).getUserId());
+
+            if (user.getLogin().equals("Admin")) {
+                role = "Admin";
+            } else {
+                role = "user";
+            }
+            System.out.println("Logged as:  " +  role);
         }else{
-            role = "standard user";
+            System.out.println("WRONG PASSWORD!!!!!");
         }
-
         //setUser(user.getLogin(), role);
-        model.addAttribute("role",role);
+       // model.addAttribute("role",role);
        // session.setAttribute("who", user.getLogin());
 
 

@@ -20,11 +20,18 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
+    public List<User> getUserByName(String name){
+
+
+        return userRepository.findByLoginLike(name);
+    }
+
     public void addUser(User user){
 
         userRepository.save(user);
 
     }
+
 
     public List<User> listUsers(){
 
