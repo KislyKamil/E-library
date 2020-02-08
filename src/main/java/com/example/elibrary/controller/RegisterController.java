@@ -2,7 +2,6 @@ package com.example.elibrary.controller;
 import com.example.elibrary.entity.User;
 import com.example.elibrary.model.RegisterForm;
 import com.example.elibrary.service.UserService;
-import org.aspectj.weaver.bcel.BcelAccessForInlineMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -48,7 +47,7 @@ public class RegisterController {
 
         userService.addUser(user);
 
-        return "Success";
+        return "success";
 
     }
 

@@ -46,6 +46,8 @@ public class LoginController{
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
+
+
         request.getSession().setAttribute("name", "admin");
 
         try {
@@ -59,6 +61,9 @@ public class LoginController{
         ArrayList<User> logged = new ArrayList<>();
         logged.addAll(userService.getUserByName(user.getLogin()));
 
+        session.setAttribute("userId",logged.get(0).getUserId());
+        session.setAttribute("loginName",logged.get(0).getLogin());
+
         
 
 
@@ -71,7 +76,7 @@ public class LoginController{
             if (user.getLogin().equals("Admin")) {
                 role = "Admin";
             } else {
-                role = "user";
+                role = "User";
             }
             System.out.println("Logged as:  " +  role);
         }else{
@@ -82,7 +87,7 @@ public class LoginController{
        // session.setAttribute("who", user.getLogin());
 
 
-        return "Success";
+        return "success";
 
     }
 

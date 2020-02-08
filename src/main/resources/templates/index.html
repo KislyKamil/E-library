@@ -28,21 +28,24 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/Account/}">Your Account</a>
+                <a class="nav-link" th:href="@{/account/}">Your Account</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" th:if="${session.loginName} == 'Admin'">
                 <a class="nav-link" th:href="@{/adminPanel}">Admin Panel</a>
             </li>
 
         </ul>
-        <a th:text="${id}" style="margin-right: 10px;"></a>
-        <a th:text="${loginName}" style="margin-right: 10px;"></a>
-        <a href="/login" style="text-decoration: none;">
-            <button type="button" style="margin-right: 12px" class="btn btn-info">Sign in</button>
+    <div th:if="${session.loginName}" class="loggedBox">
+        <img src="images/userLogged.png"><a> &nbsp; Logged as: &nbsp; </a> <a th:text="${session.loginName}" style="margin-right: 10px;"></a>
+    </div>
+
+        <a th:text="${session.userId}" style="display: none"></a>
+        <a href="/login" style="text-decoration: none;" >
+            <button type="button" style="margin-right: 12px; border-width: 5px" class="btn btn-info btn-block">Sign in</button>
         </a>
 
         <a href="/register" style="text-decoration: none;">
-            <button type="button" class="btn btn-info">Register</button>
+            <button type="button" class="btn btn-info btn-block" style="margin-left: 8px; border-width: 5px">Register</button>
         </a>
     </div>
 </nav>
