@@ -1,10 +1,12 @@
 package com.example.elibrary.controller;
 
+import com.example.elibrary.entity.Book;
 import com.example.elibrary.entity.User;
+import com.example.elibrary.service.BookService;
 import com.example.elibrary.service.UserService;
-import org.graalvm.compiler.lir.LIRInstruction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,13 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jdk.nashorn.internal.objects.NativeArray.lastIndexOf;
+
 @Controller
 public class AdminController {
 
     private final UserService userService;
+    private final BookService bookService;
 
-    public AdminController(UserService userService){
+    public AdminController(UserService userService, BookService bookService){
+
         this.userService = userService;
+        this.bookService = bookService;
     }
 
 
@@ -39,5 +46,25 @@ public class AdminController {
         return listUser ;
     }
 
+    @GetMapping(path = "/adminPanel/addBook")
+    public void addBook(@RequestParam("name")String name, @RequestParam("author") String author, Model model){
+
+        Book book = new Book();
+        book.setName(name);
+        book.setAuthor(author);
+        book.setStatus(true);
+        book.setBookId((bookService.listBooks().size())+1);
+
+
+
+            bookService.addBook(book);
+
+
+            model.addAttribute("msg", "book added successfully");
+
+
+
+
+    }
 
 }

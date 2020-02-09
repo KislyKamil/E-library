@@ -39,7 +39,7 @@
         <img src="images/userLogged.png"><a> &nbsp; Logged as: &nbsp; </a> <a th:text="${session.loginName}" style="margin-right: 10px;"></a>
     </div>
 
-        <a th:text="${session.userId}" style="display: none"></a>
+        <a th:text="${session.userId}" class="userId" style="display: none"></a>
         <a href="/login" style="text-decoration: none;" >
             <button type="button" style="margin-right: 12px; border-width: 5px" class="btn btn-info btn-block">Sign in</button>
         </a>
@@ -74,7 +74,7 @@
 
         <td th:text="${book.name}"></td>
         <td th:text="${book.author}"></td>
-        <td> <button class='btn btn-primary' th:id="${book.bookId}" onclick="add()">reserve</button></td>
+        <td> <button class='btn btn-primary reserve' th:id="${book.bookId}" onclick="add(), reserve(this.id)">reserve</button></td>
     </tr>
     </tbody>
 </table>

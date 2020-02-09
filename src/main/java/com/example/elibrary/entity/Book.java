@@ -12,8 +12,8 @@ public class Book implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(insertable = false, name = "book_id", nullable = false)
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(insertable = false, name = "bookId", nullable = false)
+  //@GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer bookId;
 
   @Column(name = "name")
@@ -24,6 +24,7 @@ public class Book implements Serializable {
 
   @Column(name = "status", nullable = false)
   private Boolean status;
+
 
 
 }

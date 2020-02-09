@@ -27,10 +27,29 @@ function setPage(id) {
 
 
 function add() {
-    console.log("ok?!")
+
     let x = document.getElementById("snackbar");
     x.className = "show";
     setTimeout(function() {
         x.className = x.className.replace("show", "");
     }, 3000);
 }
+
+
+function reserve(id){
+
+    let userId = $('.userId').text();
+
+      fetch("/reserve/"+ id +"?userId=" +userId
+
+      ).then((response) => {
+          return response.json();
+
+      })
+
+
+}
+
+
+
+

@@ -1,6 +1,5 @@
 
 
-
 $(document).ready(function () {
 
     $('.page-item[id="1"]')
@@ -92,9 +91,9 @@ function newPage(response) {
     tbody.innerHTML = "";
 
     for (var i = 0; i < obj.length; i++) {
-        let tr = "<tr id =" + obj[i].bookId + ">";
+        let tr = "<tr>";
 
-        tr += "<td>" + obj[i].name.toString() + "</td>" + "<td>" + obj[i].author.toString() + "</td><td><button class='btn btn-primary' id=" + obj[i].bookId + " onclick='add()'>reserve</button></td></tr>";
+        tr += "<td>" + obj[i].name.toString() + "</td>" + "<td>" + obj[i].author.toString() + "</td><td><button class='btn btn-primary reserve' id=" + obj[i].bookId + " onclick='add(),reserve(this.id)'>reserve</button></td></tr>";
 
         tbody.innerHTML += tr;
     }

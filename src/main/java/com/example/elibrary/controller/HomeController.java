@@ -20,8 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.DateFormatter;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -80,7 +86,7 @@ public class HomeController {
         model.addObject("books", bookList);
         model.addObject("length", pageNumbers);
         model.addObject("orders", orderService.listOrders());
-      //  model.addObject("exist", "tak");
+
 
         return model;
 
@@ -134,6 +140,28 @@ public class HomeController {
 
         return results;
 
+    }
+
+    @RequestMapping(path = "/reserve/{id}")
+    public void reserveBook(@PathVariable("id") int id, @RequestParam("userId") int userId){
+
+    ArrayList<Book> book = new ArrayList<>();
+    book.add(bookService.getBook(id));
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+       // LocalDate date = LocalDate.now();
+       // DateFormatter dateFormat = new DateFormatter.ofPattern("yyyy-mm-dd");
+        String dateString = dateFormat.format(date);
+
+        System.out.println(dateString);
+
+    Order order = new Order();
+    order.setBookName(book.get(0).getName());
+    order.setUserId(userId);
+    order.setDate(dateString);
+
+    orderService.addOrder(order);
     }
 
 
