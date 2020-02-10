@@ -20,6 +20,26 @@
 
 <nav th:replace="index:: defNav"></nav>
 
+<div class="container">
+    <div>
+        <p>Personal information:</p>
+        <ul th:each="user: ${users}">
+            <li th:text="${user.login}"></li>
+            <li th:text="${user.email}"></li>
+        </ul>
+    <button class="editUser">Edit</button>
+
+    </div>
+    <div>
+        <p>Books:</p>
+        <ul th:each="order: ${orders}">
+            <li th:text="${order.bookName}"></li>
+            <li th:text="${order.date}"></li>
+        </ul>
+    </div>
+
+</div>
+
 
 <footer class="footer">
     <a>Copyright Kamil Kisły</a>

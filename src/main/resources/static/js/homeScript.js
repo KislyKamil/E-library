@@ -8,21 +8,6 @@ $('.search-button').click(function () {
 });
 
 
-/*
-function setPage(id) {
-    let page = document.getElementById(id);
-
-    let previousId = 1;
-
-
-    let previous = String(previousId);
-
-
-    let previousPage = document.getElementById(previous);
-
-    page.setAttribute("class", "page-item active");
-}
-*/
 
 
 

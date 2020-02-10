@@ -78,9 +78,10 @@ function showUser(data) {
     body.innerHTML = "";
     let div1 = "<div class='userLogin'>" + obj[0].login + "</div></br>";
     let div2 = "<div class='userLogin'>" + obj[0].email + "</div></br>";
+    let div3 = "<button class='btn btn-danger' id=" + obj[0].userId + ">Delete User</button></br>";
+    let div4 = "<button class='btn btn-light' id=" + obj[0].userId + ">Check orders</button></br>";
 
-
-    body.innerHTML = div1 + div2;
+    body.innerHTML = div1 + div2 + div3 + div4;
 
 }
 

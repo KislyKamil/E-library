@@ -2,6 +2,7 @@ package com.example.elibrary.service;
 
 
 import com.example.elibrary.entity.Order;
+import com.example.elibrary.model.order;
 import com.example.elibrary.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,15 @@ public class OrderService {
     public Order getOrder(int id){
 
         return orderRepository.findById(id).get();
+    }
 
+    public List<Order> showUserOrder(int id){
 
+        ArrayList<Order> orders = new ArrayList<>();
+
+        orders.addAll(orderRepository.showOrders(id));
+
+        return orders;
     }
 
     public void addOrder(Order order){
