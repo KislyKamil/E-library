@@ -5,6 +5,7 @@ import com.example.elibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,11 +35,17 @@ public class RegisterController {
 
 
     @RequestMapping(path = "/registerUser")
-    public String registerUser(@ModelAttribute("registerForm") RegisterForm form) {
+    public String registerUser(@ModelAttribute("registerForm") RegisterForm form, Model model) {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         User user = new User();
+
+        if(form.getLogin().isEmpty() || form.getEmail().isEmpty() || form.getPassword().isEmpty()){
+
+            model.addAttribute("error", "You have to fill every field!");
+            return "register";
+        }
         user.setLogin(form.getLogin());
         user.setPassword(encoder.encode(form.getPassword()));
         user.setEmail(form.getEmail());

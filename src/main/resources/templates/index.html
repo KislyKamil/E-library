@@ -36,12 +36,15 @@
 
         </ul>
     <div th:if="${session.loginName}" class="loggedBox">
+
         <img src="images/userLogged.png"><a> &nbsp; Logged as: &nbsp; </a> <a th:text="${session.loginName}" style="margin-right: 10px;"></a>
     </div>
-
+        <a th:if="${session.loginName}"href="/logout">
+            <button type="button" style="margin-right: 12px; border-width: 5px" class="btn btn-info btn-block">Log out</button>
+        </a>
         <a th:text="${session.userId}" class="userId" style="display: none"></a>
         <a href="/login" style="text-decoration: none;" >
-            <button type="button" style="margin-right: 12px; border-width: 5px" class="btn btn-info btn-block">Sign in</button>
+            <button type="button" style="margin-right: 12px; margin-left: 3px; border-width: 5px" class="btn btn-info btn-block">Sign in</button>
         </a>
 
         <a href="/register" style="text-decoration: none;">
@@ -74,7 +77,13 @@
 
         <td th:text="${book.name}"></td>
         <td th:text="${book.author}"></td>
-        <td> <button class='btn btn-primary reserve' th:id="${book.bookId}" onclick="add(), reserve(this.id)">reserve</button></td>
+        <div th:if="${book.status} == true">
+            <td> <button class='btn btn-primary reserve' th:id="${book.bookId}" onclick="add(), reserve(this.id)">reserve</button></td>
+        </div>
+        <div th:if="${book.status} == false">
+            <td> <button class='btn btn-warning' th:id="${book.bookId}" onclick="noBook()">Unavailable</button></td>
+        </div>
+
     </tr>
     </tbody>
 </table>
@@ -94,6 +103,7 @@
 
 </nav>
 <footer class="footer">
+    Icons by <a target="_blank" href="https://icons8.com">Icons8</a></br>
    <a>Copyright Kamil Kisły</a>
 </footer>
 

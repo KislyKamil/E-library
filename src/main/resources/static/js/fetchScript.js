@@ -32,7 +32,7 @@ $(".search-icon").click(() => {
 
 
     if(!query){
-        console.log("You have to put something to search!")
+        alert("You have to put something to search!")
 
 
     }else if(query != ""){
@@ -76,12 +76,13 @@ function showUser(data) {
     let obj = data;
 
     body.innerHTML = "";
-    let div1 = "<div class='userLogin'>" + obj[0].login + "</div></br>";
-    let div2 = "<div class='userLogin'>" + obj[0].email + "</div></br>";
-    let div3 = "<button class='btn btn-danger' id=" + obj[0].userId + ">Delete User</button></br>";
-    let div4 = "<button class='btn btn-light' id=" + obj[0].userId + ">Check orders</button></br>";
+    let div1 = "<div class='userInfo'>User's Login: " + obj[0].login + "</div>";
+    let div2 = "<div class='userInfo'>User's email: " + obj[0].email + "</div>";
+    let div3 = "<button class='btn btn-danger delete' onclick='deleteUser();' id=" + obj[0].userId + ">Delete User</button></br>";
+    let div4 = "<button class='btn btn-light showOrders' data-toggle='modal' data-target='#staticBackdrop' onclick='showOrders();' id=" + obj[0].userId + ">Check orders</button></br>";
 
-    body.innerHTML = div1 + div2 + div3 + div4;
+    body.innerHTML = div1 + div2 + div4 + div3;
+
 
 }
 
@@ -93,9 +94,20 @@ function newPage(response) {
 
     for (var i = 0; i < obj.length; i++) {
         let tr = "<tr>";
+        let div;
 
-        tr += "<td>" + obj[i].name.toString() + "</td>" + "<td>" + obj[i].author.toString() + "</td><td><button class='btn btn-primary reserve' id=" + obj[i].bookId + " onclick='add(),reserve(this.id)'>reserve</button></td></tr>";
+        if(obj[i].status == true){
+
+            div = "<button onclick='add(),reserve(this.id)' class='btn btn-primary reserve' id=" + obj[i].bookId + ">reserve</button>"
+
+        }else if (obj[i].status == false){
+
+            div = "<button onclick='noBook()' class='btn btn-warning' th:id=" + obj[i].bookId + ">Unavailable</button>"
+        }
+
+        tr += "<td>" + obj[i].name.toString() + "</td>" + "<td>" + obj[i].author.toString() + "</td><td>"+div+"</td></tr>";
 
         tbody.innerHTML += tr;
     }
 }
+

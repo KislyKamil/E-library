@@ -46,25 +46,23 @@ public class LoginController{
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
-
-
         request.getSession().setAttribute("name", "admin");
 
-        try {
+
             if (user.getPassword().isEmpty()) {
-                return "error";
+
+                model.addAttribute("error","Password is empty");
+                return "login";
+
+            }else if (user.getLogin().isEmpty()){
+
+            model.addAttribute("error","Login is empty");
+            return "login";
             }
 
-        } catch (Exception e) {
-
-        }
         ArrayList<User> logged = new ArrayList<>();
         logged.addAll(userService.getUserByName(user.getLogin()));
 
-        session.setAttribute("userId",logged.get(0).getUserId());
-        session.setAttribute("loginName",logged.get(0).getLogin());
-
-        
 
 
 
@@ -72,35 +70,33 @@ public class LoginController{
 
             model.addAttribute("loginName", user.getLogin());
             model.addAttribute("id", logged.get(0).getUserId());
+            session.setAttribute("userId",logged.get(0).getUserId());
+            session.setAttribute("loginName",logged.get(0).getLogin());
 
             if (user.getLogin().equals("Admin")) {
                 role = "Admin";
             } else {
                 role = "User";
             }
-            System.out.println("Logged as:  " +  role);
+            System.out.println("Logged as: " +  role);
         }else{
-            System.out.println("WRONG PASSWORD!!!!!");
+
+            model.addAttribute("error","Wrong Password!");
+            return "login";
         }
-        //setUser(user.getLogin(), role);
-       // model.addAttribute("role",role);
-       // session.setAttribute("who", user.getLogin());
+
 
 
         return "success";
-
     }
 
-    /*public void setUser(String name, String role) {
+    @RequestMapping(path = "/logout")
+    public String logout(HttpSession session) {
 
-        //this.user = new User (name, role);
-        this.user = new User();
-        user.setUserName(name);
-        user.setUserRole(role);
+        session.removeAttribute("loginName");
 
+        return "success";
     }
 
-
-     */
 
 }

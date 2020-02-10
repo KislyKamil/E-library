@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AdminController {
 
 
     @RequestMapping(path = "/adminPanel")
-    public String mainPage(){
+    public String mainPage() {
 
         return "adminPanel";
     }
@@ -58,8 +59,6 @@ public class AdminController {
         book.setStatus(true);
         book.setBookId((bookService.listBooks().size())+1);
 
-
-
             bookService.addBook(book);
 
 
@@ -69,14 +68,31 @@ public class AdminController {
 
     @RequestMapping(path = "/adminPanel/findOrders")
     @ResponseBody
-    public List<Order> getUser(@RequestParam("query") int query){
+    public List<Order> getUser(@RequestParam("id") int id){
 
         List<Order> orders = new ArrayList<>();
 
 
-        orders.addAll(orderService.showUserOrder(query));
+        orders.addAll(orderService.showUserOrder(id));
 
         return orders ;
+    }
+    @RequestMapping(path = "/adminPanel/delete")
+    @ResponseBody
+    public void deleteUser(@RequestParam("id") int id){
+
+
+        userService.deleteUser(id);
+
+
+    }
+
+    @RequestMapping(path = "/adminPanel/deleteOrder")
+    @ResponseBody
+    public void deleteOrder(@RequestParam("id") int id){
+
+        orderService.deleteOrder(id);
+
     }
 
 }

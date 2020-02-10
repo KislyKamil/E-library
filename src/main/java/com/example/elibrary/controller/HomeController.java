@@ -150,8 +150,6 @@ public class HomeController {
 
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-       // LocalDate date = LocalDate.now();
-       // DateFormatter dateFormat = new DateFormatter.ofPattern("yyyy-mm-dd");
         String dateString = dateFormat.format(date);
 
         System.out.println(dateString);

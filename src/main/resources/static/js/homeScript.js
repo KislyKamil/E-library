@@ -37,4 +37,11 @@ function reserve(id){
 
 
 
+function noBook(){
+
+    alert("Book is already reserved!")
+}
+
+
+
 

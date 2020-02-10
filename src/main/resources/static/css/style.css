@@ -232,12 +232,33 @@ footer {
     color: #252c37;
     background-color: inherit;
     width: 250px;
-    height: 250px;
+    height: 180px;
+    border-width: thin;
+    border-style: groove;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+    align: left;
+
 }
-.userLogin{
+.delete {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.showOrders {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.userInfo{
     background-color: #dddddd;
-    border-style: ridge;
+    border-style: groove;
+    border-width: thin;
     box-shadow: #dddddd;
+}
+
+#box1 {
+    text-align: center;
+    justify-content: center;
 }
 #box2 div {
     margin: 10px;
@@ -250,4 +271,18 @@ footer {
     border-color: darkslateblue;
     margin-right: 15px;
     margin-top: 3px;
+}
+
+.order-item{
+    border-color: #634082;
+    border-style: groove;
+    border-width: thin;
+}
+
+.books{
+  border-style: groove;
+}
+.addBook{
+    position: center;
+
 }
